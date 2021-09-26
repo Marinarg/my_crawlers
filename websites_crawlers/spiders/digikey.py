@@ -179,7 +179,7 @@ class DigikeySpider(scrapy.Spider):
             ]
 
             yield {
-                "product_name": product_name,
+                "product_name": product_name.lower(),
                 "product_description": product_description,
                 "product_labels": ",".join(product_labels),
                 "product_id": product_id,

@@ -168,7 +168,7 @@ class BaudaeletronicaSpider(scrapy.Spider):
         product_description = response.xpath("//div[@class='texto']/p").get()
 
         yield {
-            "product_name": product_name,
+            "product_name": product_name.lower(),
             "product_description": product_description,
             "product_labels": kwargs["category"],
             "product_id": product_id,

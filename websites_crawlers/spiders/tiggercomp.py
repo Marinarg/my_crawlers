@@ -175,7 +175,7 @@ class TiggerCompSpider(scrapy.Spider):
                 product_price = re.findall("\d+,\d+", [s for s in response.xpath("//td[@class='pageHeading']/text()").getall() if "R$" in s][0])[0]
 
             yield {
-                "product_name": product_name,
+                "product_name": product_name.lower(),
                 "product_description": product_description,
                 "product_labels": None,
                 "product_id": product_id,
