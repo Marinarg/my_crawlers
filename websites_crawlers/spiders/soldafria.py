@@ -71,7 +71,7 @@ class SoldafriaSpider(SitemapSpider):
             in_stock = None
 
         yield {
-            "product_name": product_name,
+            "product_name": product_name.lower(),
             "product_description": product_description,
             "product_labels": product_keywords,
             "product_id": product_id,

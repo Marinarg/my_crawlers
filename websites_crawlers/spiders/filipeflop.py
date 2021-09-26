@@ -214,7 +214,7 @@ class FilipeflopSpider(scrapy.Spider):
             product_price = None
 
         yield {
-            "product_name": product_name,
+            "product_name": product_name.lower(),
             "product_description": product_description,
             "product_labels": kwargs["category"],
             "product_id": product_id,
