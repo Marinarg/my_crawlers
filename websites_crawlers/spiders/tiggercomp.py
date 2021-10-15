@@ -174,18 +174,19 @@ class TiggerCompSpider(scrapy.Spider):
             else:
                 product_price = re.findall("\d+,\d+", [s for s in response.xpath("//td[@class='pageHeading']/text()").getall() if "R$" in s][0])[0]
 
-            yield {
-                "product_name": product_name.lower(),
-                "product_description": product_description,
-                "product_labels": None,
-                "product_id": product_id,
-                "product_price": product_price,
-                "product_image": product_image,
-                "product_url": response.url,
-                "currency_iso": currency_iso,
-                "currency_symbol": currency_symbol,
-                "in_stock": in_stock,
-                "execution_date": date.today().strftime("%Y/%m/%d"),
-                "website_domain": "tiggercomp",
-                "website_url": "http://www.tiggercomp.com.br/novaloja/",
-            }
+            if product_name:
+                yield {
+                    "product_name": product_name.lower(),
+                    "product_description": product_description,
+                    "product_labels": None,
+                    "product_id": product_id,
+                    "product_price": product_price,
+                    "product_image": product_image,
+                    "product_url": response.url,
+                    "currency_iso": currency_iso,
+                    "currency_symbol": currency_symbol,
+                    "in_stock": in_stock,
+                    "execution_date": date.today().strftime("%Y/%m/%d"),
+                    "website_domain": "tiggercomp",
+                    "website_url": "http://www.tiggercomp.com.br/novaloja/",
+                }

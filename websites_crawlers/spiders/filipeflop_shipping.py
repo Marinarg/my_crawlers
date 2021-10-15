@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import re
 import scrapy
 
 from datetime import date
@@ -25,9 +26,21 @@ class FilipeflopShippingSpider(scrapy.Spider):
     def parse(self, response):
         """Function to parse shipping information."""
 
-        yield{
-            "response": str(json.loads(response.body)),
-            "execution_date": date.today().strftime("%Y/%m/%d"),
-            "website_domain": "filipeflop",
-            "website_url": "https://www.filipeflop.com/",
-        }
+        json_response = json.loads(response.body)
+
+        if json_response:
+            parsed_response = [
+                {
+                "type": json_response['rates'][key]['label'].split('-')[0],
+                'deadline': re.findall('[0-9]+', json_response['rates'][key]['label'].split('-')[1])[0][0] + ' dias úteis',
+                'price': 'R$ '+re.findall('(?<=span>)((.*?)(?=<))', json_response['rates'][key]['cost'])[0][0]
+                } for key in json_response['rates'].keys() if 'local_pickup' not in key
+            ]
+
+
+            yield{
+                "response": str(parsed_response),
+                "execution_date": date.today().strftime("%Y/%m/%d"),
+                "website_domain": "filipeflop",
+                "website_url": "https://www.filipeflop.com/",
+            }

@@ -167,18 +167,19 @@ class BaudaeletronicaSpider(scrapy.Spider):
         # Product description
         product_description = response.xpath("//div[@class='texto']/p").get()
 
-        yield {
-            "product_name": product_name.lower(),
-            "product_description": product_description,
-            "product_labels": kwargs["category"],
-            "product_id": product_id,
-            "product_price": product_price,
-            "product_image": product_image,
-            "product_url": response.url,
-            "currency_iso": currency_iso,
-            "currency_symbol": currency_symbol,
-            "in_stock": in_stock,
-            "execution_date": date.today().strftime("%Y/%m/%d"),
-            "website_domain": "baudaeletronica",
-            "website_url": "https://www.baudaeletronica.com.br/",
-        }
+        if product_name:
+            yield {
+                "product_name": product_name.lower(),
+                "product_description": product_description,
+                "product_labels": kwargs["category"],
+                "product_id": product_id,
+                "product_price": product_price,
+                "product_image": product_image,
+                "product_url": response.url,
+                "currency_iso": currency_iso,
+                "currency_symbol": currency_symbol,
+                "in_stock": in_stock,
+                "execution_date": date.today().strftime("%Y/%m/%d"),
+                "website_domain": "baudaeletronica",
+                "website_url": "https://www.baudaeletronica.com.br/",
+            }
