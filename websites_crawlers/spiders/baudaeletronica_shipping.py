@@ -39,7 +39,7 @@ class BaudaeletronicaShippingSpider(scrapy.Spider):
 
             yield{
                 "response": str(parsed_response),
-                "execution_date": date.today().strftime("%Y/%m/%d"),
+                "execution_date": str(date.today().strftime("%Y/%m/%d")),
                 "website_domain": "baudaeletronica",
                 "website_url": "https://www.baudaeletronica.com.br/",
             }

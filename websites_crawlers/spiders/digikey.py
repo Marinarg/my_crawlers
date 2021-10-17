@@ -192,7 +192,7 @@ class DigikeySpider(scrapy.Spider):
                     "currency_iso": currency_iso,
                     "currency_symbol": currency_symbol,
                     "in_stock": in_stock,
-                    "execution_date": date.today().strftime("%Y/%m/%d"),
+                    "execution_date": str(date.today().strftime("%Y/%m/%d")),
                     "website_domain": "digikey",
                     "website_url": "https://www.digikey.com",
                 }

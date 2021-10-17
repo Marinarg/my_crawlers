@@ -82,7 +82,7 @@ class SoldafriaSpider(SitemapSpider):
                 "currency_iso": currency_iso,
                 "currency_symbol": currency_symbol,
                 "in_stock": in_stock,
-                "execution_date": date.today().strftime("%Y/%m/%d"),
+                "execution_date": str(date.today().strftime("%Y/%m/%d")),
                 "website_domain": "soldafria",
                 "website_url": "https://www.soldafria.com.br/",
             }
