@@ -11,8 +11,8 @@ class FilipeflopSpider(scrapy.Spider):
     start_urls = ["https://www.filipeflop.com"]
 
     custom_settings = {
-        "CONCURRENT_REQUESTS": 24,
-        "CONCURRENT_REQUESTS_PER_DOMAIN": 24,
+        "CONCURRENT_REQUESTS": 64,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 64,
         "DOWNLOAD_DELAY": 1,
         "ROBOTSTXT_OBEY": False,
         "FEED_EXPORT_ENCODING": "utf-8",
