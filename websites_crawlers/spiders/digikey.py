@@ -12,8 +12,8 @@ class DigikeySpider(scrapy.Spider):
     start_urls = ["https://www.digikey.com"]
 
     custom_settings = {
-        "CONCURRENT_REQUESTS": 24,
-        "CONCURRENT_REQUESTS_PER_DOMAIN": 24,
+        "CONCURRENT_REQUESTS": 64,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 64,
         "DOWNLOAD_DELAY": 1,
         "ROBOTSTXT_OBEY": False,
         "FEED_EXPORT_ENCODING": "utf-8",
@@ -131,9 +131,14 @@ class DigikeySpider(scrapy.Spider):
         ):
 
             # Product name
-            product_name = response.xpath(
-                "//th[@class='MuiTableCell-root MuiTableCell-head jss127']/h1/text()"
-            ).get()
+            if response.xpath("//th[@class='MuiTableCell-root MuiTableCell-head jss127']/h1/text()"):
+                product_name = response.xpath(
+                    "//th[@class='MuiTableCell-root MuiTableCell-head jss127']/h1/text()"
+                ).get()
+            elif response.xpath("//tr[@class='MuiTableRow-root MuiTableRow-head']/th[@class='MuiTableCell-root MuiTableCell-head jss134']/h1/text()"):
+                product_name = response.xpath(
+                    "//tr[@class='MuiTableRow-root MuiTableRow-head']/th[@class='MuiTableCell-root MuiTableCell-head jss134']/h1/text()"
+                ).get()
 
             # Product description
             product_description = "".join(
@@ -192,7 +197,7 @@ class DigikeySpider(scrapy.Spider):
                     "currency_iso": currency_iso,
                     "currency_symbol": currency_symbol,
                     "in_stock": in_stock,
-                    "execution_date": date.today().strftime("%Y/%m/%d"),
+                    "execution_date": str(date.today().strftime("%Y/%m/%d")),
                     "website_domain": "digikey",
                     "website_url": "https://www.digikey.com",
                 }

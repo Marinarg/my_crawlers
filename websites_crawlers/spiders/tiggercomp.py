@@ -13,8 +13,8 @@ class TiggerCompSpider(scrapy.Spider):
     start_urls = ["http://www.tiggercomp.com.br/novaloja/"]
 
     custom_settings = {
-        "CONCURRENT_REQUESTS": 24,
-        "CONCURRENT_REQUESTS_PER_DOMAIN": 24,
+        "CONCURRENT_REQUESTS": 64,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 64,
         "DOWNLOAD_DELAY": 1,
         "ROBOTSTXT_OBEY": False,
         "FEED_EXPORT_ENCODING": "utf-8",
@@ -186,7 +186,7 @@ class TiggerCompSpider(scrapy.Spider):
                     "currency_iso": currency_iso,
                     "currency_symbol": currency_symbol,
                     "in_stock": in_stock,
-                    "execution_date": date.today().strftime("%Y/%m/%d"),
+                    "execution_date": str(date.today().strftime("%Y/%m/%d")),
                     "website_domain": "tiggercomp",
                     "website_url": "http://www.tiggercomp.com.br/novaloja/",
                 }

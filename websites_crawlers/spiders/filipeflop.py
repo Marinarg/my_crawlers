@@ -11,8 +11,8 @@ class FilipeflopSpider(scrapy.Spider):
     start_urls = ["https://www.filipeflop.com"]
 
     custom_settings = {
-        "CONCURRENT_REQUESTS": 24,
-        "CONCURRENT_REQUESTS_PER_DOMAIN": 24,
+        "CONCURRENT_REQUESTS": 64,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 64,
         "DOWNLOAD_DELAY": 1,
         "ROBOTSTXT_OBEY": False,
         "FEED_EXPORT_ENCODING": "utf-8",
@@ -225,7 +225,7 @@ class FilipeflopSpider(scrapy.Spider):
                 "currency_iso": currency_iso,
                 "currency_symbol": currency_symbol,
                 "in_stock": in_stock,
-                "execution_date": date.today().strftime("%Y/%m/%d"),
+                "execution_date": str(date.today().strftime("%Y/%m/%d")),
                 "website_domain": "filipeflop",
                 "website_url": "https://www.filipeflop.com/",
             }
