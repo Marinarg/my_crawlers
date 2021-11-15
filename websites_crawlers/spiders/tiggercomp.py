@@ -10,7 +10,7 @@ from websites_crawlers.utils import get_info
 class TiggerCompSpider(scrapy.Spider):
     name = "tiggercomp"
     allowed_domains = ["www.tiggercomp.com.br"]
-    start_urls = ["http://www.tiggercomp.com.br/novaloja/"]
+    start_urls = ["http://www.tiggercomp.com.br/novaloja2/"]
 
     custom_settings = {
         "CONCURRENT_REQUESTS": 64,
