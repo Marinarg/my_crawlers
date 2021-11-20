@@ -10,6 +10,7 @@ class DigikeySpider(scrapy.Spider):
     name = "digikey"
     allowed_domains = ["digikey.com/"]
     start_urls = ["https://www.digikey.com"]
+    handle_httpstatus_list = [403]
 
     custom_settings = {
         "CONCURRENT_REQUESTS": 64,
