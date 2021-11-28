@@ -13,8 +13,8 @@ class DigikeySpider(scrapy.Spider):
     handle_httpstatus_list = [403]
 
     custom_settings = {
-        "CONCURRENT_REQUESTS": 64,
-        "CONCURRENT_REQUESTS_PER_DOMAIN": 64,
+        "CONCURRENT_REQUESTS": 1,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 1,
         "DOWNLOAD_DELAY": 1,
         "ROBOTSTXT_OBEY": False,
         "FEED_EXPORT_ENCODING": "utf-8",
@@ -65,7 +65,7 @@ class DigikeySpider(scrapy.Spider):
         }
 
         sitemap_urls = [
-            sitemap[0]
+            sitemap[0].replace("en", "pt")
             for sitemap in re.findall(
                 "(?<=<loc>)((https:\/\/www\.digikey\.com\/[a-z]+\/product-detail\/submap\/(.*?)\.xml)(?=<\/loc>))",
                 response.text,
@@ -100,16 +100,16 @@ class DigikeySpider(scrapy.Spider):
         }
 
         products_urls = [
-            prod[0].replace(".pt/", ".com/")
+            prod[0]
             for prod in re.findall(
-                '(?<=href=")((https:\/\/www\.digikey\.pt\/product-detail\/en\/(.*?)\/(.*?))(?="\s\/>))',
+                '(?<=https:\/\/)((www\.digikey\.com\/en\/products\/detail\/([a-z]*-*[a-z]*-*)*\/([a-zA-Z]*\d*[a-zA-Z]*)\/*(\d*[a-zA-Z]*\d*)*))',
                 response.text,
             )
         ]
 
         for url in products_urls:
             yield scrapy.Request(
-                url,
+                'https://'+ url,
                 headers=headers,
                 method="GET",
                 meta=response.meta,
