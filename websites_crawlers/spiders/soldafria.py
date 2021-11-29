@@ -76,7 +76,7 @@ class SoldafriaSpider(SitemapSpider):
                 "product_description": product_description,
                 "product_labels": product_keywords,
                 "product_id": product_id,
-                "product_price": product_price,
+                "product_price": product_price.replace(".", ",").replace(",", "."),
                 "product_image": product_image,
                 "product_url": response.url,
                 "currency_iso": currency_iso,

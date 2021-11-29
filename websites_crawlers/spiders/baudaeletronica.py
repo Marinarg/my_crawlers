@@ -132,9 +132,16 @@ class BaudaeletronicaSpider(scrapy.Spider):
             product_id = response.xpath("//span[@class='title-rating']/text()").get()
 
         # Product price
-        product_price = response.xpath(
-            "//span[@class='regular-price']/span[@class='price']/text()"
-        ).get()
+        if response.xpath("//span[@class='regular-price']/span[@class='price']/text()"):
+            product_price = response.xpath(
+                "//span[@class='regular-price']/span[@class='price']/text()"
+            ).get()
+        else:
+            product_price = [
+                item for item in re.findall(
+                    "\d*\,*\.*\d*\,*\.*\d*",
+                    response.xpath("//p[@class='special-price']/span[@class='price']/text()").get()
+                ) if item][0]
 
         # Product image
         product_image = response.xpath("//div[@class='img-box']/figure/a/@href").get()
@@ -173,7 +180,7 @@ class BaudaeletronicaSpider(scrapy.Spider):
                 "product_description": product_description,
                 "product_labels": kwargs["category"],
                 "product_id": product_id,
-                "product_price": product_price,
+                "product_price": product_price.replace(".", ",").replace(",", "."),
                 "product_image": product_image,
                 "product_url": response.url,
                 "currency_iso": currency_iso,

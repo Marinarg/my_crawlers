@@ -192,7 +192,7 @@ class DigikeySpider(scrapy.Spider):
                     "product_description": product_description,
                     "product_labels": ",".join(product_labels),
                     "product_id": product_id,
-                    "product_price": product_price,
+                    "product_price": product_price.replace(".", ",").replace(",", "."),
                     "product_image": product_image,
                     "product_url": response.url,
                     "currency_iso": currency_iso,
