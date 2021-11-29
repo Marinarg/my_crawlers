@@ -188,7 +188,7 @@ class DigikeySpider(scrapy.Spider):
             if product_name:
                 gs = goslate.Goslate()
                 yield {
-                    "product_name": gs.translate(product_name.lower(), 'pt'),
+                    "product_name": gs.translate(product_name.lower().replace(",", "."), 'pt'),
                     "product_description": product_description,
                     "product_labels": ",".join(product_labels),
                     "product_id": product_id,

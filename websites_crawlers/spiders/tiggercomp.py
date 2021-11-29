@@ -155,7 +155,7 @@ class TiggerCompSpider(scrapy.Spider):
 
         if product_name:
             yield {
-                "product_name": product_name.lower(),
+                "product_name": product_name.lower().replace(",", "."),
                 "product_description": product_description,
                 "product_labels": None,
                 "product_id": product_id,
