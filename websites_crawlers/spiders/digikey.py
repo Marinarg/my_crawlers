@@ -102,7 +102,7 @@ class DigikeySpider(scrapy.Spider):
         products_urls = [
             prod[0]
             for prod in re.findall(
-                '(?<=https:\/\/)((www\.digikey\.com\/en\/products\/detail\/([a-z]*-*[a-z]*-*)*\/([a-zA-Z]*\d*[a-zA-Z]*)\/*(\d*[a-zA-Z]*\d*)*))',
+                '(?<=https:\/\/)((www\.digikey\.com\/en\/products\/detail\/([a-z]*-*[a-z]*-*)*\/([a-zA-Z]*\d*[a-zA-Z]*)\/*(\d*[a-zA-Z]*\d*)*\/*(\d*[a-zA-Z]*\d*)*))',
                 response.text,
             )
         ]
@@ -189,7 +189,7 @@ class DigikeySpider(scrapy.Spider):
                 gs = goslate.Goslate()
                 yield {
                     "product_name": gs.translate(product_name.lower().replace(",", "."), 'pt'),
-                    "product_description": product_description,
+                    "product_description": gs.translate(product_description, 'pt'),
                     "product_labels": ",".join(product_labels),
                     "product_id": product_id,
                     "product_price": product_price.replace(".", ",").replace(",", "."),
