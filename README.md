@@ -2,13 +2,13 @@
 
 Dedicated repository for storing crawler scripts using Scrapy tool. So far there are 7 crawlers:
 
-- **[baudaeletronica]**
-- **[baudaeletronica_shipping]**
-- **[digikey]**
-- **[filipeflop]**
-- **[filipeflop_shipping]**
-- **[filipeflop]**
-- **[filipeflop]**
+- **baudaeletronica**
+- **baudaeletronica_shipping**
+- **digikey**
+- **filipeflop**
+- **filipeflop_shipping**
+- **filipeflop**
+- **filipeflop**
 
 ## Crawlers
 
