@@ -7,8 +7,8 @@ Dedicated repository for storing crawler scripts using Scrapy tool. So far there
 - **digikey**
 - **filipeflop**
 - **filipeflop_shipping**
-- **filipeflop**
-- **filipeflop**
+- **soldafria.py**
+- **tiggercomp**
 
 ## Crawlers
 
